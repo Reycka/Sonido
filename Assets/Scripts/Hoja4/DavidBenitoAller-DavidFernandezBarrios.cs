@@ -11,15 +11,18 @@ public class crossfade : MonoBehaviour
 
     private AudioSource[] sources;
 
+    //indice del clip actual para repetirlo a la hora de tirar el random
     private int actClip = -1;
 
+    //indice para saber cual de los dos canales es el que actualmente esta sonando
     int channelActive = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //Creamos dos audioSource que represetan nuestros dos canales
         sources = new AudioSource[2];
-        for(int i = 0; i< 1; i++)
+        for(int i = 0; i< 2; i++)
         {
             sources[i] = gameObject.AddComponent<AudioSource>();
             sources[i].loop = true;
@@ -31,20 +34,22 @@ public class crossfade : MonoBehaviour
         sources[0].Play();
     }
 
+    //Metodo auxiliar para hacer el cambio de del indice del clip actual
     private void ChangeClip()
     {
         int next = actClip;
         do
         {
-            actClip = Random.Range(0,clips.Length-1);
+            actClip = Random.Range(0,clips.Length);
         }while(next == actClip);
 
     }
 
-    IEnumerator crossFade()
+    IEnumerator CrossFadeRoutine()
     {
         ChangeClip();
         int otherChannel = channelActive;
+        // En funcion del canal activo cambiamos la pista del otro canal por la nueva y seteamos su volumen a 0
         if (channelActive == 0)
         {
             sources[1].clip = clips[actClip];
@@ -60,13 +65,16 @@ public class crossfade : MonoBehaviour
             channelActive = 0;
         }
        
-        for (int t = 0; t<= lap; t+= 0.1)
+       float t = 0;
+       //Crossfade de los canales
+        while ( t<= lap)
         {   
+            t+= Time.deltaTime;
             //Sube
             sources[channelActive].volume = Mathf.Sqrt(t/lap);
             //Baja
             sources[otherChannel].volume = Mathf.Sqrt((lap-t)/lap);
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForEndOfFrame();
         }
         sources[channelActive].volume = 1.0f;
         sources[otherChannel].volume = 0.0f;
@@ -75,7 +83,9 @@ public class crossfade : MonoBehaviour
     void Update()
     {
         
-        if (Input.GetKeyDown("N"))
-            StartCorrutine(crossFade());
+        if (Input.GetKeyDown(KeyCode.N)) 
+        {
+            StartCoroutine(CrossFadeRoutine());
+        }
     }
 }
