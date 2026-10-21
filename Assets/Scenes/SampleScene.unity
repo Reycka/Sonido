@@ -374,7 +374,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1056118500}
-  - component: {fileID: 1056118499}
+  - component: {fileID: 1056118501}
   m_Layer: 0
   m_Name: cross
   m_TagString: Untagged
@@ -382,23 +382,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1056118499
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1056118498}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e64f095c6c7d4313aa9394ce1f96819, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lap: 1
-  clips:
-  - {fileID: 8300000, guid: f7e56314c882479a19c6996509859b2f, type: 3}
-  - {fileID: 8300000, guid: 1142d23010cda4eb0b3cf0188aaf15b2, type: 3}
-  - {fileID: 8300000, guid: e152f810bed57b908a341d49ab4f49ca, type: 3}
 --- !u!4 &1056118500
 Transform:
   m_ObjectHideFlags: 0
@@ -414,6 +397,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1056118501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056118498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43f9757b25672cb13b3038da43e633a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - clipsArray: []
+  pcmDataHeads: []
+  pcmDataTails: []
+  overlapTime: 0.01
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
